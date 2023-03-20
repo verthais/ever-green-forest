@@ -1,0 +1,24 @@
+{
+	"name": "swisscome",
+    "image": "swisscome:0.0.2",
+	"runArgs": [],
+	"appPort": 40497,
+	"containerUser": "dev",
+    "extensions": [
+        "golang.go",
+    ],
+    // "build" { "dockerfile": "Dockerfile"
+    "features": {
+    },
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"streetsidesoftware.code-spell-checker"
+			]
+		}
+	},
+    "postCreateCommand": "echo 'Welcome at Swisscome'"
+}
