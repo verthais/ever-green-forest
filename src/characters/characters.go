@@ -20,7 +20,7 @@ type ICharacter interface {
 	TakeDamage(int) int
 }
 
-func NewEnemy() *Character {
+func NewEnemy() ICharacter {
 	bounds := [][]int{
 		{60, 90},
 		{60, 90},
@@ -38,7 +38,7 @@ func NewEnemy() *Character {
 	return c
 }
 
-func NewHero() *Character {
+func NewHero() ICharacter {
 	bounds := [][]int{
 		{70, 100},
 		{70, 80},

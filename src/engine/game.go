@@ -11,17 +11,19 @@ func NewGame() Game {
 	return Game{
 		MaxLoops: 20,
 		ec:       NewEncounterController(),
+		cf:       characters.NewCharacterFactory,
 	}
 }
 
 type Game struct {
 	MaxLoops int
 	ec       IEncounterController
+	cf       func(characters.CharacterType) func() characters.ICharacter
 }
 
 func (g *Game) Run() {
-	hero := characters.NewHero()
-	enemy := characters.NewEnemy()
+	hero := g.cf(characters.HERO)()
+	enemy := g.cf(characters.BEAST)()
 	loop := 0
 
 	for ; loop < g.MaxLoops; loop++ {

@@ -21,7 +21,7 @@ func assertAttr(cmp int, bounds []int) bool {
 	return cmp < bounds[0] || cmp > bounds[1]
 }
 
-func assertChar(c *characters.Character, bounds [][]int) Result {
+func assertChar(c characters.ICharacter, bounds [][]int) Result {
 	if assertAttr(c.Health(), bounds[0]) {
 		return Result{
 			false,
@@ -61,7 +61,7 @@ func assertChar(c *characters.Character, bounds [][]int) Result {
 	return Result{true, ""}
 }
 
-func fuzzyTest(msg chan Result, factory func() *characters.Character, referenceValues [][]int) {
+func fuzzyTest(msg chan Result, factory func() characters.ICharacter, referenceValues [][]int) {
 	execution := 100 + rand.Int()%100
 	for i := 0; i < execution; i++ {
 		c := factory()
@@ -73,7 +73,7 @@ func fuzzyTest(msg chan Result, factory func() *characters.Character, referenceV
 	msg <- Result{true, ""}
 }
 
-func scheduleFuzzing(t *testing.T, factory func() *characters.Character, referenceValues [][]int) {
+func scheduleFuzzing(t *testing.T, factory func() characters.ICharacter, referenceValues [][]int) {
 	msg := make(chan Result)
 
 	execution := 100 + rand.Int()%100
