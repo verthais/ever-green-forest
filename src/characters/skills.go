@@ -1,5 +1,7 @@
 package characters
 
+import "swisscom/src/engine/dice"
+
 type SkillType int
 
 const (
@@ -23,8 +25,9 @@ func (ss *Skills) Register(s SkillType, chance int) {
 	ss.all = append(ss.all, SkillDescriptor{s, chance})
 }
 
-func (ss *Skills) GetSkill(luck int) *SkillType {
+func (ss *Skills) GetSkill() *SkillType {
 	for _, st := range ss.all {
+		luck := dice.RollK100()
 		if luck < st.chance {
 			return &st.skillType
 		}

@@ -1,5 +1,8 @@
 VERSION 0.6
 
+ARG buildversion
+ARG usr
+
 docker:
     FROM golang:1.20.1
     COPY . /workspace
@@ -26,4 +29,5 @@ package:
     FROM alpine:3.14
     COPY +build/main /main
     ENTRYPOINT /main
-    SAVE IMAGE --push dimgray/ever-green-forest
+    SAVE IMAGE --push $usr/ever-green-forest:$buildversion
+    SAVE IMAGE --push $usr/ever-green-forest:latest

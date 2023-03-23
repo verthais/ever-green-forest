@@ -113,3 +113,37 @@ func TestNewNatelus(t *testing.T) {
 
 	scheduleFuzzing(t, characters.NewHero, referenceValues)
 }
+
+func TestTakeDamage(t *testing.T) {
+	referenceValues := [][]int{
+		{70, 100},
+		{70, 80},
+		{45, 55},
+		{40, 50},
+		{10, 30},
+	}
+
+	char := characters.NewCharacter(characters.GenMonsterName(), referenceValues)
+
+	i := char.Health()
+
+	value := char.TakeDamage(i)
+
+	if value != i {
+		t.Errorf("Took %d - expected %d", value, i)
+	}
+
+	value = char.TakeDamage(i)
+
+	if value != 0 {
+		t.Errorf("Took %d dmg - expected %d", value, 0)
+	}
+
+	if char.Health() != 0 {
+		t.Errorf("status %d - expected %d health", char.Health(), 0)
+	}
+
+	if char.Alive() {
+		t.Errorf("status %t - expected %t", char.Alive(), false)
+	}
+}

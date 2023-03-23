@@ -108,7 +108,9 @@ func (c *Character) TakeDamage(dmg int) int {
 	c.currentHealth.Value -= dmg
 
 	if c.currentHealth.Value < 0 {
-		return dmg - c.currentHealth.Value
+		dmg = dmg + c.currentHealth.Value
+		c.currentHealth.Value = 0
+		return dmg
 	}
 
 	return dmg
@@ -139,13 +141,9 @@ func (c Character) Luck() int {
 }
 
 func (c Character) GetOffensiveSkill() *SkillType {
-	roll := dice.RollK100()
-
-	return c.offensiveSkills.GetSkill(roll)
+	return c.offensiveSkills.GetSkill()
 }
 
 func (c *Character) GetDefensiveSkill() *SkillType {
-	roll := dice.RollK100()
-
-	return c.defensiveSkills.GetSkill(roll)
+	return c.defensiveSkills.GetSkill()
 }

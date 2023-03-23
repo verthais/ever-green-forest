@@ -35,7 +35,7 @@ jobs:
         password: ${{ secrets.DOCKERHUBTOKEN }}
 
     - name: Run integration test
-      run: earthly --ci -P --push +test
+      run: earthly -P --push +test
 
     - name: Run check Code Quality
       run: earthly --ci +check
@@ -44,4 +44,4 @@ jobs:
       run: earthly --ci +build
 
     - name: Publish Docker Image
-      run: earthly --remote-cache=${{ secrets.DOCKERHUBUSR }}/ever-green-forest:${{github.run_number}} --push +package
+      run: earthly --build-arg usr=${{ secrets.DOCKERHUBUSR }} --build-arg buildversion=${{ github.run_number }} --push +package
